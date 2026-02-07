@@ -21,14 +21,12 @@
     .garden {
       width: 100%;
       max-width: 420px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
       border-radius: 30px;
       padding: 25px 20px;
       text-align: center;
-      box-shadow:
-        0 0 30px rgba(255, 105, 180, 0.4),
-        inset 0 0 20px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
       position: relative;
       z-index: 2;
     }
@@ -56,16 +54,7 @@
       background-size: cover;
       background-position: center;
       border: 5px solid #ff8fab;
-      box-shadow:
-        0 0 20px rgba(255, 105, 180, 0.6),
-        inset 0 0 15px rgba(255, 255, 255, 0.8);
-    }
-
-    .signature {
-      margin-top: 15px;
-      color: #ff4d6d;
-      font-style: italic;
-      font-size: 1em;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
     }
 
     audio {
@@ -73,22 +62,54 @@
       margin-top: 15px;
     }
 
-    /* Floating magic elements */
+    /* Hidden message */
+    .secret {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 20px;
+      background: linear-gradient(to right, #ffe6eb, #fff0f5);
+      color: #b3003b;
+      font-size: 1.05em;
+      box-shadow: 0 0 15px rgba(255, 77, 109, 0.4);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Button */
+    .magic-btn {
+      margin-top: 15px;
+      padding: 12px 22px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(to right, #ff4d6d, #ff8fab);
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+      animation: glow 2s infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 77, 109, 0.6); }
+      50% { box-shadow: 0 0 25px rgba(255, 105, 180, 0.9); }
+    }
+
+    /* Floating magic */
     .magic {
       position: fixed;
       pointer-events: none;
       animation: float 10s linear infinite;
       opacity: 0.85;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(110vh) scale(0.8) rotate(0deg);
-      }
-      100% {
-        transform: translateY(-130vh) scale(1.2) rotate(360deg);
-      }
+      0% { transform: translateY(110vh) rotate(0deg); }
+      100% { transform: translateY(-130vh) rotate(360deg); }
     }
   </style>
 </head>
@@ -100,35 +121,38 @@
     <div class="photo"></div>
 
     <p>
-      In this little garden of dreams,<br>
-      every rose whispers your name.<br>
-      You are my magic, my warmth,<br>
-      my forever 💖
+      This garden hides a little secret…<br>
+      Tap the button and feel the magic 💖
     </p>
 
-    <div class="signature">
-      With all my love ✨
+    <button class="magic-btn" onclick="revealMagic()">Tap for Magic ✨</button>
+
+    <div class="secret" id="secretMessage">
+      You are my favorite miracle 🌸<br>
+      My safe place, my smile, my forever.<br>
+      I choose you — always 💕
     </div>
 
     <audio controls loop>
       <source src="music.mp3" type="audio/mpeg">
-      Your browser does not support audio.
     </audio>
   </div>
 
   <script>
-    const magicItems = ["🌹", "🌸", "🌺", "💐", "✨", "💖", "💫", "🌙"];
-    const total = 35;
+    function revealMagic() {
+      document.querySelector(".magic-btn").style.display = "none";
+      document.getElementById("secretMessage").style.display = "block";
 
-    for (let i = 0; i < total; i++) {
-      const item = document.createElement("div");
-      item.className = "magic";
-      item.innerText = magicItems[Math.floor(Math.random() * magicItems.length)];
-      item.style.left = Math.random() * 100 + "vw";
-      item.style.fontSize = (16 + Math.random() * 24) + "px";
-      item.style.animationDuration = (8 + Math.random() * 8) + "s";
-      item.style.animationDelay = Math.random() * 5 + "s";
-      document.body.appendChild(item);
+      const items = ["✨", "💖", "🌸", "🌹", "💫"];
+      for (let i = 0; i < 25; i++) {
+        const el = document.createElement("div");
+        el.className = "magic";
+        el.innerText = items[Math.floor(Math.random() * items.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.fontSize = (16 + Math.random() * 20) + "px";
+        el.style.animationDuration = (6 + Math.random() * 6) + "s";
+        document.body.appendChild(el);
+      }
     }
   </script>
 
