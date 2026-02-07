@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Rose Garden 🌹</title>
+  <title>My Magical Rose Garden 🌹✨</title>
 
   <style>
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(to bottom, #ffccd5, #ffe6eb);
-      font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+      background: radial-gradient(circle at top, #ffe6f0, #ffb3c6, #ff8fab);
+      font-family: 'Segoe UI', 'Comic Sans MS', cursive;
       overflow-x: hidden;
       display: flex;
       justify-content: center;
@@ -19,26 +19,31 @@
     }
 
     .garden {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 25px;
-      padding: 25px 20px;
-      text-align: center;
       width: 100%;
       max-width: 420px;
-      box-shadow: 0 10px 25px rgba(255, 105, 135, 0.4);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow:
+        0 0 30px rgba(255, 105, 180, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.6);
+      position: relative;
       z-index: 2;
     }
 
     h1 {
       color: #ff4d6d;
-      font-size: 2em;
+      font-size: 2.1em;
       margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
     }
 
     p {
       color: #6b1c2f;
       font-size: 1.05em;
-      line-height: 1.6;
+      line-height: 1.7;
       margin: 10px 0;
     }
 
@@ -51,13 +56,16 @@
       background-size: cover;
       background-position: center;
       border: 5px solid #ff8fab;
-      box-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+      box-shadow:
+        0 0 20px rgba(255, 105, 180, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.8);
     }
 
     .signature {
       margin-top: 15px;
       color: #ff4d6d;
       font-style: italic;
+      font-size: 1em;
     }
 
     audio {
@@ -65,20 +73,21 @@
       margin-top: 15px;
     }
 
-    .rose {
+    /* Floating magic elements */
+    .magic {
       position: fixed;
-      font-size: 22px;
-      animation: float 10s linear infinite;
-      opacity: 0.8;
       pointer-events: none;
+      animation: float 10s linear infinite;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
     }
 
     @keyframes float {
       0% {
-        transform: translateY(110vh) rotate(0deg);
+        transform: translateY(110vh) scale(0.8) rotate(0deg);
       }
       100% {
-        transform: translateY(-120vh) rotate(360deg);
+        transform: translateY(-130vh) scale(1.2) rotate(360deg);
       }
     }
   </style>
@@ -86,18 +95,19 @@
 <body>
 
   <div class="garden">
-    <h1>My Rose Garden 🌹</h1>
+    <h1>My Magical Rose Garden 🌹✨</h1>
 
     <div class="photo"></div>
 
     <p>
-      Every rose in this garden blooms<br>
-      with love meant just for you.<br>
-      Thank you for being my happiness 💕
+      In this little garden of dreams,<br>
+      every rose whispers your name.<br>
+      You are my magic, my warmth,<br>
+      my forever 💖
     </p>
 
     <div class="signature">
-      Forever yours 💖
+      With all my love ✨
     </div>
 
     <audio controls loop>
@@ -107,15 +117,18 @@
   </div>
 
   <script>
-    const roses = ["🌹", "🌸", "🌺", "💐"];
-    for (let i = 0; i < 25; i++) {
-      const rose = document.createElement("div");
-      rose.className = "rose";
-      rose.innerText = roses[Math.floor(Math.random() * roses.length)];
-      rose.style.left = Math.random() * 100 + "vw";
-      rose.style.animationDuration = (7 + Math.random() * 6) + "s";
-      rose.style.fontSize = (18 + Math.random() * 16) + "px";
-      document.body.appendChild(rose);
+    const magicItems = ["🌹", "🌸", "🌺", "💐", "✨", "💖", "💫", "🌙"];
+    const total = 35;
+
+    for (let i = 0; i < total; i++) {
+      const item = document.createElement("div");
+      item.className = "magic";
+      item.innerText = magicItems[Math.floor(Math.random() * magicItems.length)];
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.fontSize = (16 + Math.random() * 24) + "px";
+      item.style.animationDuration = (8 + Math.random() * 8) + "s";
+      item.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(item);
     }
   </script>
 
