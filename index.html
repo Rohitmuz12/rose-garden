@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Rose Garden 🌹</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #ffccd5, #ffe6eb);
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .garden {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 25px 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(255, 105, 135, 0.4);
+      z-index: 2;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #6b1c2f;
+      font-size: 1.05em;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .photo {
+      margin: 15px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-image: url("photo.jpg");
+      background-size: cover;
+      background-position: center;
+      border: 5px solid #ff8fab;
+      box-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+    }
+
+    .signature {
+      margin-top: 15px;
+      color: #ff4d6d;
+      font-style: italic;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .rose {
+      position: fixed;
+      font-size: 22px;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(110vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="garden">
+    <h1>My Rose Garden 🌹</h1>
+
+    <div class="photo"></div>
+
+    <p>
+      Every rose in this garden blooms<br>
+      with love meant just for you.<br>
+      Thank you for being my happiness 💕
+    </p>
+
+    <div class="signature">
+      Forever yours 💖
+    </div>
+
+    <audio controls loop>
+      <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
+  </div>
+
+  <script>
+    const roses = ["🌹", "🌸", "🌺", "💐"];
+    for (let i = 0; i < 25; i++) {
+      const rose = document.createElement("div");
+      rose.className = "rose";
+      rose.innerText = roses[Math.floor(Math.random() * roses.length)];
+      rose.style.left = Math.random() * 100 + "vw";
+      rose.style.animationDuration = (7 + Math.random() * 6) + "s";
+      rose.style.fontSize = (18 + Math.random() * 16) + "px";
+      document.body.appendChild(rose);
+    }
+  </script>
+
+</body>
+</html>
