@@ -38,7 +38,7 @@ body.night {
   text-align: center;
   box-shadow: 0 0 35px rgba(255, 105, 180, 0.45);
   position: relative;
-  z-index: 10;
+  z-index: 5;
 }
 
 body.night .garden {
@@ -49,7 +49,6 @@ body.night .garden {
 h1 {
   color: #ff4d6d;
   font-size: 2.1em;
-  margin-bottom: 8px;
 }
 
 body.night h1 {
@@ -109,7 +108,7 @@ body.night .toggle {
   color: #ffbde6;
 }
 
-/* Secret message */
+/* Secret */
 .secret {
   display: none;
   margin-top: 16px;
@@ -124,7 +123,6 @@ body.night .toggle {
 body.night .secret {
   background: rgba(255, 120, 200, 0.18);
   color: #ffd6f0;
-  box-shadow: 0 0 22px rgba(255, 120, 200, 0.7);
 }
 
 @keyframes reveal {
@@ -132,49 +130,27 @@ body.night .secret {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Falling roses */
+/* Falling roses (front) */
 .rose {
   position: fixed;
   top: -40px;
-  font-size: 22px;
-  animation: fall linear forwards;
+  font-size: 24px;
   pointer-events: none;
+  z-index: 20;
+  animation: fall linear forwards;
+  filter: drop-shadow(0 0 6px rgba(255,0,85,0.6));
 }
 
 @keyframes fall {
-  to { transform: translateY(85vh); }
-}
-
-/* Grass ground */
-#ground {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 130px;
-  background: linear-gradient(to top, #1e7f4f, #3cb371, transparent);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: center;
-  font-size: 22px;
-  padding: 8px;
-  pointer-events: none;
-}
-
-body.night #ground {
-  background: linear-gradient(to top, #0a3b2a, #145a43, transparent);
-}
-
-#ground span {
-  filter: drop-shadow(0 0 7px rgba(255, 0, 85, 0.75));
+  to { transform: translateY(110vh) rotate(360deg); }
 }
 
 /* Leaves */
 .leaf {
   position: fixed;
   pointer-events: none;
-  animation: leafFall 10s linear infinite;
+  animation: leafFall 12s linear infinite;
+  z-index: 15;
 }
 
 @keyframes leafFall {
@@ -182,10 +158,26 @@ body.night #ground {
   to { transform: translateY(110vh) rotate(360deg); }
 }
 
+/* Ground */
+#ground {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(to top, #1e7f4f, #3cb371, transparent);
+  pointer-events: none;
+}
+
+body.night #ground {
+  background: linear-gradient(to top, #0a3b2a, #145a43, transparent);
+}
+
 /* Shapes */
 .shape {
   position: fixed;
   font-size: 18px;
+  z-index: 8;
   animation: glow 2s infinite alternate;
 }
 
@@ -202,7 +194,7 @@ body.night #ground {
   <h1>For Jyoti 🌹✨</h1>
   <div class="photo"></div>
 
-  <p>This little garden was made to feel warm, safe, and full of love 💕</p>
+  <p>This little garden is made to feel warm, calm, and full of love 💕</p>
 
   <button class="magic-btn" onclick="startMagic()">Tap for Magic ✨</button>
   <div class="toggle" onclick="toggleNight()">🌙 Toggle Night Mode</div>
@@ -237,14 +229,10 @@ function startMagic() {
     r.className = "rose";
     r.innerText = "🌹";
     r.style.left = Math.random() * 100 + "vw";
-    r.style.animationDuration = (4 + Math.random() * 3) + "s";
+    r.style.animationDuration = (6 + Math.random() * 4) + "s";
     document.body.appendChild(r);
-
-    setTimeout(() => {
-      r.remove();
-      document.getElementById("ground").innerHTML += "<span>🌹</span>";
-    }, 5000);
-  }, 900);
+    setTimeout(() => r.remove(), 10000);
+  }, 700);
 
   // Leaves
   setInterval(() => {
@@ -254,28 +242,37 @@ function startMagic() {
     l.style.left = Math.random() * 100 + "vw";
     l.style.fontSize = (14 + Math.random() * 16) + "px";
     document.body.appendChild(l);
-    setTimeout(() => l.remove(), 10000);
-  }, 1300);
+    setTimeout(() => l.remove(), 12000);
+  }, 1200);
 
-  // Heart shape
-  const heart = [[-2,1],[2,1],[-3,2],[3,2],[-2,3],[2,3],[0,4]];
-  heart.forEach(p => {
-    const h = document.createElement("div");
-    h.className = "shape";
-    h.innerText = "🌹";
-    h.style.left = 50 + p[0] * 3 + "vw";
-    h.style.top = 40 + p[1] * 5 + "vh";
-    document.body.appendChild(h);
-  });
+  spellJyoti();
+}
 
-  // Spell JYOTI
-  "JYOTI".split("").forEach((_, i) => {
-    const s = document.createElement("div");
-    s.className = "shape";
-    s.innerText = "🌹";
-    s.style.left = 20 + i * 12 + "vw";
-    s.style.top = "70vh";
-    document.body.appendChild(s);
+/* SPELL JYOTI PROPERLY */
+function spellJyoti() {
+  const letters = {
+    J: [[2,0],[2,1],[2,2],[1,3],[0,3]],
+    Y: [[0,0],[4,0],[2,1],[2,2],[2,3]],
+    O: [[0,0],[1,0],[2,0],[0,1],[2,1],[0,2],[2,2],[0,3],[1,3],[2,3]],
+    T: [[0,0],[1,0],[2,0],[1,1],[1,2],[1,3]],
+    I: [[0,0],[1,0],[2,0],[1,1],[1,2],[0,3],[1,3],[2,3]]
+  };
+
+  let startX = 12;
+  let startY = 60;
+  let gap = 7;
+  let offsetX = 0;
+
+  Object.keys(letters).forEach(letter => {
+    letters[letter].forEach(p => {
+      const r = document.createElement("div");
+      r.className = "shape";
+      r.innerText = "🌹";
+      r.style.left = startX + offsetX + p[0] * 2 + "vw";
+      r.style.top = startY + p[1] * 3 + "vh";
+      document.body.appendChild(r);
+    });
+    offsetX += gap;
   });
 }
 </script>
