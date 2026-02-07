@@ -3,208 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magical Rose Garden 🌹✨</title>
+<title>For Jyoti 🌹✨</title>
 
 <style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(to top, #ffd6e8, #fff0f6);
-    font-family: 'Comic Sans MS', 'Segoe UI', cursive;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px;
-  }
+:root {
+  --day-bg: linear-gradient(to top, #ffd6e8, #fff0f6);
+  --night-bg: radial-gradient(circle at top, #0b1026, #1b0036);
+}
 
-  .garden {
-    width: 100%;
-    max-width: 420px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 32px;
-    padding: 22px 18px 26px;
-    text-align: center;
-    box-shadow: 0 0 35px rgba(255, 105, 180, 0.45);
-    position: relative;
-    z-index: 5;
-  }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--day-bg);
+  font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  transition: background 1.2s ease;
+}
 
-  h1 {
-    color: #ff4d6d;
-    font-size: 2.1em;
-    margin-bottom: 8px;
-    text-shadow: 0 0 12px rgba(255, 77, 109, 0.6);
-  }
+body.night {
+  background: var(--night-bg);
+}
 
-  p {
-    color: #7a1c3a;
-    font-size: 1.05em;
-    line-height: 1.7;
-  }
+/* Card */
+.garden {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 32px;
+  padding: 22px 18px 26px;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(255, 105, 180, 0.45);
+  position: relative;
+  z-index: 10;
+}
 
-  .photo {
-    margin: 14px auto;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    background-image: url("photo.jpg");
-    background-size: cover;
-    background-position: center;
-    border: 5px solid #ff9ebb;
-    box-shadow: 0 0 18px rgba(255, 105, 180, 0.6);
-  }
+body.night .garden {
+  background: rgba(15, 10, 40, 0.88);
+  box-shadow: 0 0 45px rgba(255, 120, 200, 0.6);
+}
 
-  .magic-btn {
-    margin-top: 14px;
-    padding: 12px 26px;
-    border-radius: 40px;
-    border: none;
-    background: linear-gradient(to right, #ff4d6d, #ff85a1);
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(255, 77, 109, 0.7);
-    animation: pulse 2s infinite;
-  }
+h1 {
+  color: #ff4d6d;
+  font-size: 2.1em;
+  margin-bottom: 8px;
+}
 
-  @keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.06); }
-  }
+body.night h1 {
+  color: #ff9edb;
+  text-shadow: 0 0 14px #ff9edb;
+}
 
-  .secret {
-    display: none;
-    margin-top: 16px;
-    padding: 16px;
-    border-radius: 22px;
-    background: linear-gradient(to bottom, #fff0f6, #ffe1ec);
-    color: #b3004b;
-    font-size: 1.05em;
-    box-shadow: 0 0 18px rgba(255, 105, 180, 0.45);
-    animation: reveal 1.4s ease forwards;
-  }
+p {
+  color: #7a1c3a;
+  font-size: 1.05em;
+  line-height: 1.7;
+}
 
-  @keyframes reveal {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
+body.night p {
+  color: #ffd6f0;
+}
 
-  audio {
-    width: 100%;
-    margin-top: 14px;
-  }
+/* Photo */
+.photo {
+  margin: 14px auto;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background-image: url("photo.jpg");
+  background-size: cover;
+  background-position: center;
+  border: 5px solid #ff9ebb;
+  box-shadow: 0 0 18px rgba(255, 105, 180, 0.6);
+}
 
-  /* Falling roses */
-  .rose {
-    position: fixed;
-    top: -40px;
-    font-size: 22px;
-    animation: fall linear forwards;
-    pointer-events: none;
-  }
+/* Buttons */
+.magic-btn {
+  margin-top: 14px;
+  padding: 12px 26px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(to right, #ff4d6d, #ff85a1);
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.7);
+  animation: pulse 2s infinite;
+}
 
-  @keyframes fall {
-    to {
-      transform: translateY(calc(100vh - var(--stack)));
-    }
-  }
+@keyframes pulse {
+  50% { transform: scale(1.06); }
+}
 
-  /* Rose bed at bottom */
-  #roseBed {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    pointer-events: none;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    padding: 4px;
-    font-size: 20px;
-  }
+.toggle {
+  margin-top: 10px;
+  font-size: 0.9em;
+  cursor: pointer;
+  color: #ff4d6d;
+}
 
-  /* Sparkles */
-  .sparkle {
-    position: fixed;
-    pointer-events: none;
-    animation: sparkle 6s linear infinite;
-  }
+body.night .toggle {
+  color: #ffbde6;
+}
 
-  @keyframes sparkle {
-    0% { transform: translateY(100vh); opacity: 0; }
-    30% { opacity: 1; }
-    100% { transform: translateY(-120vh); opacity: 0; }
-  }
+/* Secret message */
+.secret {
+  display: none;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(to bottom, #fff0f6, #ffe1ec);
+  color: #b3004b;
+  box-shadow: 0 0 18px rgba(255, 105, 180, 0.45);
+  animation: reveal 1.3s ease forwards;
+}
+
+body.night .secret {
+  background: rgba(255, 120, 200, 0.18);
+  color: #ffd6f0;
+  box-shadow: 0 0 22px rgba(255, 120, 200, 0.7);
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Falling roses */
+.rose {
+  position: fixed;
+  top: -40px;
+  font-size: 22px;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to { transform: translateY(85vh); }
+}
+
+/* Grass ground */
+#ground {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: linear-gradient(to top, #1e7f4f, #3cb371, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 22px;
+  padding: 8px;
+  pointer-events: none;
+}
+
+body.night #ground {
+  background: linear-gradient(to top, #0a3b2a, #145a43, transparent);
+}
+
+#ground span {
+  filter: drop-shadow(0 0 7px rgba(255, 0, 85, 0.75));
+}
+
+/* Leaves */
+.leaf {
+  position: fixed;
+  pointer-events: none;
+  animation: leafFall 10s linear infinite;
+}
+
+@keyframes leafFall {
+  from { transform: translateY(-10vh) rotate(0deg); }
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Shapes */
+.shape {
+  position: fixed;
+  font-size: 18px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
 </style>
 </head>
 
 <body>
 
 <div class="garden">
-  <h1>Magical Rose Garden 🌹✨</h1>
-
+  <h1>For Jyoti 🌹✨</h1>
   <div class="photo"></div>
 
-  <p>
-    This place is made to feel warm,<br>
-    safe, happy… just like you 💕
-  </p>
+  <p>This little garden was made to feel warm, safe, and full of love 💕</p>
 
   <button class="magic-btn" onclick="startMagic()">Tap for Magic ✨</button>
+  <div class="toggle" onclick="toggleNight()">🌙 Toggle Night Mode</div>
 
   <div class="secret" id="secret">
-    You make my days softer 🌸<br>
+    Jyoti, you make my world softer 🌸<br>
     My heart calmer 💖<br>
-    And my world brighter ✨<br><br>
-    I’m so grateful for you 🌹
+    And my days brighter 🌹
   </div>
-
-  <!-- MUSIC BAR (VISIBLE) -->
-  <audio controls loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
 </div>
 
-<div id="roseBed"></div>
+<!-- Hidden Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="ground"></div>
 
 <script>
-  let roseStack = 0;
+function toggleNight() {
+  document.body.classList.toggle("night");
+}
 
-  function startMagic() {
-    document.querySelector(".magic-btn").style.display = "none";
-    document.getElementById("secret").style.display = "block";
+function startMagic() {
+  document.querySelector(".magic-btn").style.display = "none";
+  document.getElementById("secret").style.display = "block";
+  document.getElementById("bgMusic").play();
 
-    // Falling roses
-    setInterval(() => {
-      const rose = document.createElement("div");
-      rose.className = "rose";
-      rose.innerText = "🌹";
-      rose.style.left = Math.random() * 100 + "vw";
-      rose.style.animationDuration = (4 + Math.random() * 3) + "s";
-      rose.style.setProperty("--stack", roseStack + "px");
-      document.body.appendChild(rose);
+  // Falling roses
+  setInterval(() => {
+    const r = document.createElement("div");
+    r.className = "rose";
+    r.innerText = "🌹";
+    r.style.left = Math.random() * 100 + "vw";
+    r.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(r);
 
-      setTimeout(() => {
-        rose.remove();
-        const bed = document.getElementById("roseBed");
-        bed.innerHTML += "🌹";
-        roseStack = Math.min(60, roseStack + 4);
-      }, 6000);
-    }, 800);
+    setTimeout(() => {
+      r.remove();
+      document.getElementById("ground").innerHTML += "<span>🌹</span>";
+    }, 5000);
+  }, 900);
 
-    // Sparkles
-    setInterval(() => {
-      const sp = document.createElement("div");
-      sp.className = "sparkle";
-      sp.innerText = ["✨","💖","🌸","💫"][Math.floor(Math.random()*4)];
-      sp.style.left = Math.random() * 100 + "vw";
-      sp.style.fontSize = (14 + Math.random()*18) + "px";
-      document.body.appendChild(sp);
-      setTimeout(()=>sp.remove(),6000);
-    }, 700);
-  }
+  // Leaves
+  setInterval(() => {
+    const l = document.createElement("div");
+    l.className = "leaf";
+    l.innerText = "🍃";
+    l.style.left = Math.random() * 100 + "vw";
+    l.style.fontSize = (14 + Math.random() * 16) + "px";
+    document.body.appendChild(l);
+    setTimeout(() => l.remove(), 10000);
+  }, 1300);
+
+  // Heart shape
+  const heart = [[-2,1],[2,1],[-3,2],[3,2],[-2,3],[2,3],[0,4]];
+  heart.forEach(p => {
+    const h = document.createElement("div");
+    h.className = "shape";
+    h.innerText = "🌹";
+    h.style.left = 50 + p[0] * 3 + "vw";
+    h.style.top = 40 + p[1] * 5 + "vh";
+    document.body.appendChild(h);
+  });
+
+  // Spell JYOTI
+  "JYOTI".split("").forEach((_, i) => {
+    const s = document.createElement("div");
+    s.className = "shape";
+    s.innerText = "🌹";
+    s.style.left = 20 + i * 12 + "vw";
+    s.style.top = "70vh";
+    document.body.appendChild(s);
+  });
+}
 </script>
 
 </body>
