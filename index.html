@@ -1,104 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Will You Be Mine? 💍</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            text-align: center;
-            color: #fff;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cute Proposal 💕</title>
 
-        .card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            max-width: 400px;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
 
-        p {
-            font-size: 1.2em;
-            margin-bottom: 25px;
-        }
+    .card {
+      background: #ffffffcc;
+      width: 90%;
+      max-width: 360px;
+      padding: 30px 20px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      animation: pop 0.8s ease;
+    }
 
-        button {
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: 10px;
-            transition: 0.3s;
-        }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
-        .yes {
-            background: #ff4d6d;
-            color: white;
-        }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+      color: #ff4d6d;
+    }
 
-        .yes:hover {
-            background: #ff1e4d;
-        }
+    p {
+      font-size: 1.1em;
+      color: #444;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }
 
-        .no {
-            background: #555;
-            color: white;
-            position: relative;
-        }
+    .question {
+      font-size: 1.3em;
+      color: #ff4d6d;
+      margin-bottom: 25px;
+    }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-    </style>
+    button {
+      width: 80%;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .yes:hover {
+      background: #ff1e4d;
+      transform: scale(1.05);
+    }
+
+    .no {
+      background: #bbb;
+      color: white;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      20% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Hey You 😘</h1>
+  <div class="card">
+    <h1>Hey Cutie 🥰</h1>
+
     <p>
-        Roses are red 🌹<br>
-        Violets are blue 💙<br>
-        Life would be boring…<br>
-        Without someone like YOU 😌
+      I tried to think of something smart… 🤔<br>
+      But all I could think about was YOU 💭💖
     </p>
 
-    <p><strong>So tell me…</strong><br>Will you be mine? 💍</p>
+    <p class="question">
+      Will you be mine forever? 💍✨
+    </p>
 
-    <button class="yes" onclick="yesClicked()">YES ❤️</button>
-    <button class="no" onmouseover="moveButton(this)">NO 🙄</button>
+    <button class="yes" onclick="yesClicked()">YESSS 💕</button>
+    <button class="no" onclick="noClicked()">umm… NO 🙈</button>
 
     <div class="footer">
-        Happy Propose Day, my favorite human 💕
+      Happy Propose Day 💐<br>
+      Made with too much love 💖
     </div>
-</div>
+  </div>
 
-<script>
+  <script>
     function yesClicked() {
-        alert("YAYYY!! 🎉💖 I knew it! I love you sooo much 😍");
+      alert("YAYYY!! 🥹💖 You just made me the happiest person ever 😍💍");
     }
 
-    function moveButton(btn) {
-        btn.style.position = "absolute";
-        btn.style.top = Math.random() * 80 + "%";
-        btn.style.left = Math.random() * 80 + "%";
+    function noClicked() {
+      alert("Error 404 😜❌ Option not found. Try YES 💕");
     }
-</script>
+
+    // floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 400);
+  </script>
 
 </body>
 </html>
